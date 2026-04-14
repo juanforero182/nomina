@@ -1,0 +1,28 @@
+<aside class="flex flex-col w-64 min-h-screen bg-gray-900 text-white">
+  <div class="flex items-center h-16 px-6 border-b border-gray-800">
+    <span class="text-xl font-bold tracking-wide">Nomina</span>
+  </div>
+
+  <nav class="flex-1 px-4 py-6 space-y-1">
+    <%= sidebar_link t("sidebar.dashboard"), root_path, active: current_page?(root_path) %>
+    <%= sidebar_link t("sidebar.companies"), companies_path, active: request.path.start_with?("/companies") %>
+    <%= sidebar_link t("sidebar.employees"), employees_path, active: request.path.start_with?("/employees") %>
+    <%= sidebar_link t("sidebar.users"), users_path, active: current_page?(users_path) %>
+    <%= sidebar_link t("sidebar.documents"), documents_path, active: current_page?(documents_path) %>
+    <%= sidebar_link t("sidebar.payroll_archives"), payroll_archives_path, active: current_page?(payroll_archives_path) %>
+    <%= sidebar_link t("sidebar.period_reports"), period_reports_path, active: current_page?(period_reports_path) %>
+  </nav>
+
+  <div class="px-4 py-4 border-t border-gray-800">
+    <div class="flex items-center gap-3">
+      <div class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-700 text-sm font-medium">
+        <%= current_user.email[0].upcase %>
+      </div>
+      <div class="flex-1 min-w-0">
+        <p class="text-sm font-medium truncate"><%= current_user.email %></p>
+      </div>
+    </div>
+    <%= link_to t("sidebar.sign_out"), destroy_user_session_path, data: { turbo_method: :delete },
+        class: "mt-3 block text-sm text-gray-400 hover:text-white transition-colors" %>
+  </div>
+</aside>

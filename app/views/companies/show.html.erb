@@ -1,0 +1,154 @@
+<div class="max-w-4xl mx-auto">
+  <div class="mb-6">
+    <%= link_to companies_path, class: "inline-flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700" do %>
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+      </svg>
+      <%= t("companies.back") %>
+    <% end %>
+  </div>
+
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-2xl font-bold text-gray-900"><%= @company.name %></h1>
+      <div class="flex items-center gap-3">
+        <%= link_to t("companies.actions.edit"), edit_company_path(@company),
+            class: "inline-flex items-center gap-1 rounded-md bg-white px-3 py-2 text-sm font-medium text-gray-700 shadow-sm ring-1 ring-gray-300 hover:bg-gray-50 transition-colors" %>
+        <%= link_to t("companies.actions.delete"), @company,
+            data: { turbo_method: :delete, turbo_confirm: t("companies.confirm_delete") },
+            class: "inline-flex items-center gap-1 rounded-md bg-red-50 px-3 py-2 text-sm font-medium text-red-700 shadow-sm ring-1 ring-red-200 hover:bg-red-100 transition-colors" %>
+      </div>
+    </div>
+    <dl class="grid grid-cols-2 gap-4">
+      <div>
+        <dt class="text-sm font-medium text-gray-500"><%= t("companies.fields.nit") %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @company.nit %></dd>
+      </div>
+      <div>
+        <dt class="text-sm font-medium text-gray-500"><%= t("companies.fields.employees_count") %></dt>
+        <dd class="mt-1 text-sm text-gray-900"><%= @company.employees.size %></dd>
+      </div>
+    </dl>
+
+    <div class="border-t border-gray-200 mt-4 pt-4">
+      <h3 class="text-sm font-semibold text-gray-700 mb-3"><%= t("companies.fields.payroll_section") %></h3>
+      <dl class="grid grid-cols-3 gap-4">
+        <div>
+          <dt class="text-sm font-medium text-gray-500"><%= t("companies.fields.payroll_prefix") %></dt>
+          <dd class="mt-1 text-sm text-gray-900"><%= @company.payroll_prefix_or_default %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500"><%= t("companies.fields.payroll_code") %></dt>
+          <dd class="mt-1 text-sm text-gray-900"><%= @company.payroll_code_or_default %></dd>
+        </div>
+        <div>
+          <dt class="text-sm font-medium text-gray-500"><%= t("companies.fields.last_payroll_consecutive") %></dt>
+          <dd class="mt-1 text-sm text-gray-900"><%= @company.last_payroll_consecutive %></dd>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  <%# Import section %>
+  <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <h2 class="text-sm font-semibold text-gray-700 mb-3"><%= t("companies.import.title") %></h2>
+    <p class="text-xs text-gray-500 mb-4"><%= t("companies.import.description") %></p>
+    <%= form_with url: import_employees_company_path(@company), method: :post, multipart: true,
+                  data: { controller: "import-employees", turbo: false, action: "submit->import-employees#submit" },
+                  class: "flex items-center gap-4" do %>
+      <input type="file" name="file" accept=".xlsx,.xls"
+             data-import-employees-target="fileInput"
+             data-action="change->import-employees#fileChanged"
+             class="block w-full text-sm text-gray-500
+                    file:mr-4 file:py-2 file:px-4
+                    file:rounded-md file:border-0
+                    file:text-sm file:font-medium
+                    file:bg-emerald-50 file:text-emerald-700
+                    hover:file:bg-emerald-100
+                    file:cursor-pointer" />
+      <button type="submit"
+              disabled
+              data-import-employees-target="submitButton"
+              class="inline-flex items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-medium text-white shadow-sm
+                     hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2
+                     disabled:bg-gray-300 disabled:cursor-not-allowed disabled:shadow-none
+                     transition-colors whitespace-nowrap cursor-pointer">
+        <svg data-import-employees-target="buttonIcon" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+        </svg>
+        <svg data-import-employees-target="buttonSpinner" style="display:none;" class="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+        </svg>
+        <span data-import-employees-target="buttonText"><%= t("companies.import.button") %></span>
+      </button>
+    <% end %>
+  </div>
+
+  <%# Employees section %>
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-lg font-semibold text-gray-900"><%= t("employees.index.title") %></h2>
+    <%= link_to new_company_employee_path(@company),
+        class: "inline-flex items-center gap-2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 transition-colors" do %>
+      <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      <%= t("employees.new_button") %>
+    <% end %>
+  </div>
+
+  <% if @company.employees.any? %>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("employees.fields.document") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("employees.fields.full_name") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("employees.fields.position") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("employees.fields.contract_date") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("employees.fields.status") %></th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("companies.fields.actions") %></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% @company.employees.includes(:contracts).order(:first_surname, :first_name).each do |employee| %>
+            <% latest = employee.latest_contract %>
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 text-sm text-gray-600">
+                <span class="text-xs font-medium text-gray-400"><%= employee.document_type_label %></span>
+                <%= employee.document_number %>
+              </td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900">
+                <%= link_to employee.full_name, [@company, employee], class: "text-indigo-600 hover:text-indigo-800" %>
+              </td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= latest&.position || "-" %></td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= latest&.contract_date ? l(latest.contract_date, format: :short) : "-" %></td>
+              <td class="px-6 py-4 text-sm">
+                <% if latest&.active? %>
+                  <span class="inline-flex items-center rounded-full bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20">Activo</span>
+                <% else %>
+                  <span class="inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/20">Inactivo</span>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 text-sm text-right space-x-3">
+                <%= link_to t("employees.actions.edit"), edit_company_employee_path(@company, employee),
+                    class: "text-indigo-600 hover:text-indigo-800 font-medium" %>
+                <%= link_to t("employees.actions.delete"), [@company, employee],
+                    data: { turbo_method: :delete, turbo_confirm: t("employees.confirm_delete") },
+                    class: "text-red-600 hover:text-red-800 font-medium" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+      <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+      </svg>
+      <h3 class="mt-2 text-sm font-medium text-gray-900"><%= t("employees.empty.title") %></h3>
+      <p class="mt-1 text-sm text-gray-500"><%= t("employees.empty.description") %></p>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,33 @@
+services:
+  web:
+    user: "${UID}:${GID}"
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: nomina-web
+    command: bash -c "bundle install && bin/rails db:prepare && bin/rails tailwindcss:build && bin/rails server -b 0.0.0.0 -p 3000"
+    volumes:
+      - .:/app:cached
+      - bundle_cache:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    image: postgres:15
+    container_name: nomina-db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
+  bundle_cache:

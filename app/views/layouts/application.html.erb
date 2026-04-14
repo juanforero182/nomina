@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html class="h-full bg-gray-50">
+  <head>
+    <title>Nomina</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="h-full">
+    <% if user_signed_in? %>
+      <div class="flex h-full">
+        <%= render "shared/sidebar" %>
+        <main class="flex-1 overflow-y-auto">
+          <div class="p-8">
+            <% if notice.present? %>
+              <div class="mb-4 rounded-md bg-green-50 p-4">
+                <p class="text-sm text-green-700"><%= notice %></p>
+              </div>
+            <% end %>
+            <% if alert.present? %>
+              <div class="mb-4 rounded-md bg-red-50 p-4">
+                <p class="text-sm text-red-700"><%= alert %></p>
+              </div>
+            <% end %>
+            <%= yield %>
+          </div>
+        </main>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
+  </body>
+</html>

@@ -1,0 +1,55 @@
+<div class="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-900"><%= t("sessions.title") %></h1>
+      <p class="mt-2 text-sm text-gray-600"><%= t("sessions.subtitle") %></p>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+      <% if alert.present? %>
+        <div class="mb-4 rounded-md bg-red-50 p-3">
+          <p class="text-sm text-red-700"><%= alert %></p>
+        </div>
+      <% end %>
+
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="space-y-4">
+          <div>
+            <%= f.input :email,
+                        required: false,
+                        autofocus: true,
+                        input_html: {
+                          autocomplete: "email",
+                          class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                        },
+                        label_html: { class: "block text-sm font-medium text-gray-700 mb-1" } %>
+          </div>
+
+          <div>
+            <%= f.input :password,
+                        required: false,
+                        input_html: {
+                          autocomplete: "current-password",
+                          class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
+                        },
+                        label_html: { class: "block text-sm font-medium text-gray-700 mb-1" } %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="flex items-center gap-2">
+              <%= f.input :remember_me, as: :boolean,
+                          wrapper_html: { class: "flex items-center gap-2" },
+                          input_html: { class: "h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" },
+                          label_html: { class: "text-sm text-gray-600" } %>
+            </div>
+          <% end %>
+
+          <div>
+            <%= f.button :submit, t("sessions.sign_in"),
+                         class: "w-full rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 cursor-pointer" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
