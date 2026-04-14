@@ -134,6 +134,7 @@ class DocumentsController < ApplicationController
         vacation_days: excel_emp[:vacation_days],
         salary: excel_emp[:salary],
         transport_aid: excel_emp[:transport_aid],
+        other_aid: excel_emp[:other_aid],
         total_earned: excel_emp[:total_earned],
         loans: excel_emp[:loans],
         health_employee: excel_emp[:health_employee],

@@ -46,6 +46,9 @@ module Converters
       worked_days: 38,
       worked_salary: 39,
       transport_aid: 40,
+      aid_value: 103,
+      aid_is_salary: 104,
+      aid_description: 105,
       vacation_compensated: 78,
       vacation_start: 79,
       vacation_end: 80,
@@ -151,6 +154,13 @@ module Converters
         row[COLUMNS[:transport_aid]] = transport
       elsif employee[:basic_salary].to_i <= 2_600_000
         row[COLUMNS[:transport_aid]] = 200_000
+      end
+
+      aid = employee[:other_aid].to_i
+      if aid > 0
+        row[COLUMNS[:aid_value]] = aid
+        row[COLUMNS[:aid_is_salary]] = "FALSE"
+        row[COLUMNS[:aid_description]] = "AUXILIO"
       end
 
       row[COLUMNS[:health_percentage]] = DEFAULTS[:health_percentage]
