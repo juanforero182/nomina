@@ -74,8 +74,8 @@ module Converters
 
         if nm_index
           @period_info[:reference] = matches[nm_index][0].strip
-          @period_info[:start_date] = parse_syscafe_date(matches[nm_index + 1][0].strip)
-          @period_info[:end_date] = parse_syscafe_date(matches[nm_index + 2][0].strip)
+          @period_info[:end_date] = parse_syscafe_date(matches[nm_index + 1][0].strip)
+          @period_info[:start_date] = parse_syscafe_date(matches[nm_index + 2][0].strip)
         else
           @period_info[:reference] = matches[0][0].strip
           @period_info[:end_date] = parse_syscafe_date(matches[1][0].strip)

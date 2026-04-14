@@ -86,23 +86,28 @@ module Converters
       pension_percentage: 4
     }.freeze
 
-    def initialize(employees, period_info)
+    def initialize(employees, period_info, provisions = {})
       @employees = employees
       @period_info = period_info
+      @provisions = provisions || {}
     end
 
     def generate
       start = @period_info[:start_consecutive] || 1
 
-      CSV.generate do |csv|
+      CSV.generate(force_quotes: false) do |csv|
         @employees.each_with_index do |employee, idx|
           consecutive = start + idx
-          csv << build_main_row(employee, consecutive)
+          csv << sanitize_row(build_main_row(employee, consecutive))
 
           extra_row = build_extra_row(employee, consecutive)
-          csv << extra_row if extra_row
+          csv << sanitize_row(extra_row) if extra_row
         end
       end
+    end
+
+    def sanitize_row(row)
+      row.map { |v| v.is_a?(String) ? v.tr(",", " ").squeeze(" ").strip : v }
     end
 
     private
@@ -148,12 +153,6 @@ module Converters
         row[COLUMNS[:transport_aid]] = 200_000
       end
 
-      # Bonus (prima) goes in the main row
-      if employee[:concepts]&.key?("003")
-        row[COLUMNS[:bonus_days]] = employee[:worked_days].to_i > 0 ? (employee[:worked_days].to_i * 6) : 180
-        row[COLUMNS[:bonus_payment]] = employee[:concepts]["003"].to_i
-      end
-
       row[COLUMNS[:health_percentage]] = DEFAULTS[:health_percentage]
       row[COLUMNS[:health_deduction]] = employee[:health_employee].to_i
       row[COLUMNS[:pension_percentage]] = DEFAULTS[:pension_percentage]
@@ -171,10 +170,14 @@ module Converters
     end
 
     def build_extra_row(employee, consecutive_num)
-      has_vacation = employee[:concepts]&.key?("002") || employee[:vacation_days].to_i > 0
-      has_severance = employee[:concepts]&.key?("004")
+      prov = @provisions[employee[:document_number].to_s] || {}
 
-      return nil unless has_vacation || has_severance
+      vacation_value = prov["955"].to_i
+      bonus_value = prov["956"].to_i
+      severance_value = prov["953"].to_i
+      severance_interest = prov["954"].to_i
+
+      return nil if vacation_value <= 0 && bonus_value <= 0 && severance_value <= 0 && severance_interest <= 0
 
       row = Array.new(TOTAL_COLUMNS)
 
@@ -182,23 +185,24 @@ module Converters
       row[COLUMNS[:worker_code]] = prefix[:code]
       row[COLUMNS[:prefix]] = prefix[:name]
       row[COLUMNS[:consecutive]] = consecutive_num
+      row[COLUMNS[:vacation_compensated]] = "FALSE"
 
-      if has_vacation
-        row[COLUMNS[:vacation_compensated]] = "FALSE"
-        row[COLUMNS[:vacation_days]] = employee[:vacation_days].to_i > 0 ? employee[:vacation_days] : 1
-        row[COLUMNS[:vacation_payment]] = employee[:concepts]["002"].to_i
+      if vacation_value > 0
+        row[COLUMNS[:vacation_days]] = 1
+        row[COLUMNS[:vacation_payment]] = vacation_value
       end
 
-      if has_severance
-        severance_value = employee[:concepts]["004"].to_i
+      if bonus_value > 0
+        row[COLUMNS[:bonus_days]] = 30
+        row[COLUMNS[:bonus_payment]] = bonus_value
+      end
+
+      if severance_value > 0
         row[COLUMNS[:severance_payment]] = severance_value
         row[COLUMNS[:severance_percentage]] = 12
-        row[COLUMNS[:severance_interest]] = (severance_value * 0.12).round
-
-        # Severance-related bonus in extra row
-        row[COLUMNS[:bonus_days]] = employee[:worked_days].to_i
-        row[COLUMNS[:bonus_payment]] = severance_value
       end
+
+      row[COLUMNS[:severance_interest]] = severance_interest if severance_interest > 0
 
       row
     end

@@ -1,0 +1,35 @@
+{ 
+  "informacionGeneral": {
+    "nominaAjuste": true
+  },
+ 
+  "empleador": {
+    "RazonSocial": "Pruebas",    
+    "nit": "830057860",
+    "dv": 4,
+    "Pais": "CO",
+    "DepartamentoEstado": "52",
+    "MunicipioCiudad": "52001",
+    "direccion": "pruebas123456",
+    "tipoIdentificacion": 31
+   
+  },
+  "trabajador": [
+    {
+    	"informacionPredecesor": {
+        "cunePred": "aa9eef24d32ab6335b34d067549a3049b99309c0d0b436bd70fdec12820b798a43fefebb9a41e1ffac9198822c799114",
+        "numeroPred": "MEB100238",
+        "fechaGenPred": "20220215",
+        "tipoNota": "2"
+      },
+      
+        "numeroSecuenciaXML": {
+        "codigoTrabajador": "",
+        "prefijo": "MEBE",
+        "consecutivo": 10060,
+        "numero": "MEBE10060"
+      }
+      
+    }
+  ]
+}

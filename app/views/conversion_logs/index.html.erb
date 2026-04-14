@@ -1,0 +1,44 @@
+<div class="max-w-6xl mx-auto">
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900"><%= t("conversion_logs.title") %></h1>
+    <p class="mt-1 text-sm text-gray-600"><%= t("conversion_logs.description") %></p>
+  </div>
+
+  <% if @conversion_logs.any? %>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.date") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.company") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.period") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.user") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.syscafe_file") %></th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"><%= t("conversion_logs.fields.provisions_file") %></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <% @conversion_logs.each do |log| %>
+            <tr class="hover:bg-gray-50 transition-colors">
+              <td class="px-6 py-4 text-sm text-gray-600"><%= l(log.created_at, format: :short) %></td>
+              <td class="px-6 py-4 text-sm font-medium text-gray-900"><%= log.company.name %></td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= log.period_label %></td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= log.user.email %></td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= log.syscafe_file_name %></td>
+              <td class="px-6 py-4 text-sm text-gray-600"><%= log.provisions_file_name || "-" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600">
+      <div class="text-xs text-gray-500"><%== pagy_info(@pagy) %></div>
+      <nav class="flex items-center gap-1"><%= tailwind_pagy_nav(@pagy) %></nav>
+    </div>
+  <% else %>
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
+      <p class="text-sm text-gray-500"><%= t("conversion_logs.empty") %></p>
+    </div>
+  <% end %>
+</div>

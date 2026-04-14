@@ -1,0 +1,347 @@
+{
+  "periodo": {
+    "fechaLiquidacionInicio": "20211001",
+    "fechaLiquidacionFinal": "20211031"    
+  },
+  "informacionGeneral": {
+    "nominaAjuste": true,
+    "periodoNomina": 5
+  },
+  "empleador": {
+    "razonSocial": "Pruebas",    
+    "nit": 830057860,
+    "dv": 4,
+    "pais": "CO",
+    "departamentoEstado": "52",
+    "municipioCiudad": "52001",
+    "direccion": "pruebas",
+    "email": "pruebas@pruebas.com",
+    "telefono": 123456789,
+    "codigoPostal": "456789",
+    "codigoSucursal": "A",
+    "nombreSucursal": "Pruebas",
+    "tipoIdentificacion": 31
+  },
+  "trabajador": [
+    {
+    	"informacionPredecesor": {
+        "cunePred": "94375cd8b01ccd6d5389099b86a264ea05804bf92543a39dc1c42f04920fe41352ab8f2d110eac7a2dddd27d999fbd0c",
+        "numeroPred": "MBI20022",
+        "fechaGenPred": "20220328",
+        "tipoNota": 1
+      },
+      
+      "tipoTrabajador": "01",
+      "subtipoTrabajador": "01",
+      "altoRiesgoPension": false,
+      "tipoDocumento": 13,
+      "numeroDocumento": 20018,
+      "primerApellido": "Pruebas",
+      "segundoApellido": "Pruebas",
+      "primerNombre": "Pruebas",
+      "otrosNombres": "Pruebas",
+      "lugarTrabajoPais": "BB",
+      "lugarTrabajoDireccion": "Pruebas",
+      "salarioIntegral": true,
+      "tipoContrato": "001",
+      "sueldo": 5000000,
+      "fechaIngreso": "20210101",      
+      "tiempoLaborado": 50,
+      "emailTrabajador": "pruebas@pruebas.com",
+      "notas": "Pruebas envío de notas nómina individual",
+      "comprobanteTotal": 4600000,
+      "tipoMoneda": "COP",
+      "trm": 0.0,
+      "numeroSecuenciaXML": {
+        "codigoTrabajador": "200",
+        "prefijo": "MBI",
+        "consecutivo": 20023,
+        "numero": "MBI20023"
+      },
+      "pago": {
+        "forma": 1,
+        "metodo": 2,
+        "banco": "Pruebas",
+        "tipoCuenta": "1",
+        "numeroCuenta": "123456"
+      },
+      "fechasPago": [
+        {
+          "fechaPago": "20210630"
+        }
+      ],
+      "devengados": {
+        "basico": {
+          "diasTrabajados": 30,
+          "sueldoTrabajado": 5000000
+        },
+        "heDs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 25,
+            "pago": 20000.0
+          }
+        ],
+        "heNs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 75,
+            "pago": 20000.0
+          }
+        ],
+        "hrNs": [
+          {            
+            "cantidad": 1,
+            "porcentaje": 35,
+            "pago": 20000.0
+          }
+        ],
+        "hrddFs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 100,
+            "pago": 20000.0
+          }
+        ],
+        "hendFs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 75,
+            "pago": 20000.0
+          }
+        ],
+        "hrndFs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 150,
+            "pago": 20000.0
+          }
+        ],
+        "heddFs": [
+          {
+            "horaInicio": "20210601160020",
+            "horaFin": "20210602160020",
+            "cantidad": 1,
+            "porcentaje": 110,
+            "pago": 20000.0
+          }
+        ],
+        "vacaciones": [
+          {
+            "vacacionesCompensadas": false,
+            "fechaInicio": "20210601",
+            "fechaFin": "20210615",
+            "numeroDias": 15,
+            "valorPago": 10000.78
+          },
+		  {
+            "vacacionesCompensadas": true,            
+            "numeroDias": 15,
+            "valorPago": 10000
+          }
+        ],
+        "primas": {
+          "cantidad": 10,
+          "pago": 100000,
+          "pagoNS": 0.0
+        },
+        "cesantias": {
+          "pago": 0.0,
+          "porcentaje": 0,
+          "pagoIntereses": 0.0
+        },
+        "incapacidades": [
+          {
+            "fechaInicio": "20210601",
+            "fechaFin": "20210610",
+            "cantidad": 10,
+            "tipo": 1,
+            "pago": 0.0
+          }
+        ],
+        "licencias": [
+          {
+            "tipoLicencia": 1,
+            "pago": 10,
+            "numeroDias": 10,
+            "fechaInicio": "20210610",
+            "fechaFin": "20210620"
+          }
+        ],
+        "bonificacion": [
+          {
+            "descripcion": "Pruebas",
+            "valor": 50,
+            "esSalarial": false
+          },
+		  {
+            "descripcion": "Pruebas",
+            "valor": 80,
+            "esSalarial": true
+          }
+        ],
+        "auxilios": [
+          {
+            "valor": 100,
+            "esSalarial": false,
+            "descripcion": "Pruebas"
+          }
+        ],
+        "huelgas": [
+          {
+            "fechaInicio": "20210101",
+            "fechaFin": "20210110",
+            "cantidad": 10
+          },
+		  {            
+            "cantidad": 10
+          }
+        ],
+        "otrosConceptos": [
+          {
+            "descripcionConcepto": "Pruebas",
+            "valor": 20,
+            "esParteSalario": false
+          },
+		  {
+            "descripcionConcepto": "Pruebas",
+            "valor": 10000,
+            "esParteSalario": true
+          }
+        ],
+        "compensaciones": [
+          {
+            "tipoCompensacion": 1,
+            "descripcion": "Pruebas",
+            "valor": 1000
+          },
+		  {
+            "tipoCompensacion": 2,
+            "descripcion": "Pruebas",
+            "valor": 1000
+          }
+        ],
+        "bonosEPCTV": [
+          {
+            "descripcion": "Pruebas",
+            "valor": 50000,
+            "esParteSalario": false,
+            "esPagoAlimentacion": false
+          }
+        ],
+        "comisiones": [
+          {
+            "descripcion": "Pruebas",
+            "comision": 15000
+          }
+        ],
+        "pagosTerceros": [
+          {
+            "descripcion": "Pruebas",
+            "pagoTercero": 15000
+          }
+        ],
+        "anticipos": [
+          {
+            "descripcion": "Pruebas",
+            "anticipo": 50000
+          },
+		  {
+            "descripcion": "Pruebas",
+            "anticipo": 2000
+          }
+        ],
+        "dotacion": 5000,
+        "apoyoSost": 11000,
+        "teletrabajo": 15000,
+        "bonifRetiro": 2000,
+        "indemnizacion": 1500,
+        "reintegro": 1200
+      },
+      "deducciones": {
+        "salud": {
+          "porcentaje": 4,
+          "deduccion": 200000
+        },
+        "fondoPension": {
+          "porcentaje": 4,
+          "deduccion": 200000
+        },
+        "fondoPensionSP": {
+          "porcentaje": 1,
+          "deduccionSP": 50000,
+          "porcentajeSub": 0.0,
+          "deduccionSub": 0.0
+        },
+        "sindicatos": [
+          {
+            "porcentaje": 10,
+            "deduccion": 5000
+          },
+		  {
+            "porcentaje": 0,
+            "deduccion": 0
+          }
+        ],
+        "sanciones": [
+          {
+            "descripcion": "Pruebas",
+            "valorDeduccion": 15000,
+            "tipoSancion": true
+          },
+		  {
+            "descripcion": "Pruebas",
+            "valorDeduccion": 15000,
+            "tipoSancion": false
+          }
+        ],
+        "libranzas": [
+          {
+            "descripcion": "Pruebas",
+            "valorDeduccion": 15000
+          }
+        ],
+        "pagosTerceros": [
+          {
+            "descripcion": "Pruebas",
+            "pagotercero": 15000
+          }
+        ],
+        "anticipos": [
+          {
+            "descripcion": "Pruebas",
+            "anticipo": 5000
+          }
+        ],
+        "otrosDescuentos": [
+          {
+            "descripcion": "Pruebas",
+            "otraDeduccion": 1000
+          }
+        ],
+        "pensionVoluntaria": 0.0,
+        "retencionFuente": 0.0,
+        "afc": 0.0,
+        "cooperativa": 60,
+        "embargofiscal": 50,
+        "planComplementarios": 40,
+        "educacion": 30,
+        "reintegro": 220,
+        "deuda": 10
+      },
+      "redondeo": 20,
+      "devengadosTotal": 5000000,
+      "deduccionesTotal": 450000
+    }
+  ]
+}

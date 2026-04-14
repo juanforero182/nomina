@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_13_201326) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_14_160000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -52,6 +52,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_201326) do
     t.date "vacation_date"
     t.index ["employee_id", "contract_number"], name: "index_contracts_on_employee_id_and_contract_number", unique: true
     t.index ["employee_id"], name: "index_contracts_on_employee_id"
+  end
+
+  create_table "conversion_logs", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.integer "month", null: false
+    t.string "provisions_file_name"
+    t.string "syscafe_file_name"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.integer "year", null: false
+    t.index ["company_id"], name: "index_conversion_logs_on_company_id"
+    t.index ["user_id"], name: "index_conversion_logs_on_user_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -98,6 +111,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_13_201326) do
   end
 
   add_foreign_key "contracts", "employees"
+  add_foreign_key "conversion_logs", "companies"
+  add_foreign_key "conversion_logs", "users"
   add_foreign_key "documents", "users"
   add_foreign_key "employees", "companies"
 end

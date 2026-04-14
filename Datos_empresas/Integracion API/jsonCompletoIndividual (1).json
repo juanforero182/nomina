@@ -1,0 +1,325 @@
+{
+    "periodo": {
+        "fechaLiquidacionInicio": "00010101",
+        "fechaLiquidacionFinal": "00010101",
+        "fechaGeneracion": "00010101"
+    },
+    "informacionGeneral": {
+        "nominaAjuste": false,
+        "periodoNomina": null
+    },
+    "empleador": {
+        "razonSocial": null,
+        "primerApellido": null,
+        "segundoApellido": null,
+        "primerNombre": null,
+        "otrosNombres": null,
+        "nit": null,
+        "dv": 0,
+        "pais": null,
+        "departamentoEstado": null,
+        "municipioCiudad": null,
+        "direccion": null,
+        "email": null,
+        "telefono": null,
+        "codigoPostal": null,
+        "codigoSucursal": null,
+        "nombreSucursal": null,
+        "tipoIdentificacion": null
+    },
+    "trabajador": [
+        {
+            "informacionPredecesor": {
+                "cunePred": null,
+                "numeroPred": null,
+                "fechaGenPred": "00010101",
+                "tipoNota": 0
+            },
+            "tipoTrabajador": null,
+            "subtipoTrabajador": null,
+            "altoRiesgoPension": false,
+            "tipoDocumento": 0,
+            "numeroDocumento": null,
+            "primerApellido": null,
+            "segundoApellido": null,
+            "primerNombre": null,
+            "otrosNombres": null,
+            "lugarTrabajoPais": null,
+            "lugarTrabajoDepartamentoEstado": null,
+            "lugarTrabajoMunicipioCiudad": null,
+            "lugarTrabajoDireccion": null,
+            "salarioIntegral": false,
+            "tipoContrato": 0,
+            "sueldo": 0.0,
+            "fechaIngreso": "00010101",
+            "fechaRetiro": "00010101",
+            "tiempoLaborado": 0,
+            "emailTrabajador": null,
+            "notas": null,
+            "comprobanteTotal": 0.0,
+            "tipoMoneda": null,
+            "trm": 0.0,
+            "numeroSecuenciaXML": {
+                "codigoTrabajador": null,
+                "prefijo": null,
+                "consecutivo": null,
+                "numero": null
+            },
+            "pago": {
+                "forma": 0,
+                "metodo": null,
+                "banco": null,
+                "tipoCuenta": null,
+                "numeroCuenta": null
+            },
+            "fechasPago": [
+                {
+                    "fechaPago": "00010101"
+                }
+            ],
+            "devengados": {
+                "basico": {
+                    "diasTrabajados": 0,
+                    "sueldoTrabajado": 0.0
+                },
+                "transporte": {
+                    "auxilioTransporte": 0.0,
+                    "viaticoManuAlojS": 0.0,
+                    "viaticoManuAlojNS": 0.0
+                },
+                "heDs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "heNs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "hrNs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "hrddFs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "hendFs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "hrndFs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "heddFs": [
+                    {
+                        "horaInicio": "00010101000000",
+                        "horaFin": "00010101000000",
+                        "cantidad": 0.0,
+                        "porcentaje": 0.0,
+                        "pago": 0.0
+                    }
+                ],
+                "vacaciones": [
+                    {
+                        "vacacionesCompensadas": false,
+                        "fechaInicio": "00010101",
+                        "fechaFin": "00010101",
+                        "numeroDias": 0,
+                        "valorPago": 0.0
+                    }
+                ],
+                "primas": {
+                    "cantidad": 0,
+                    "pago": 0.0,
+                    "pagoNS": 0.0
+                },
+                "cesantias": {
+                    "pago": 0.0,
+                    "porcentaje": 0.0,
+                    "pagoIntereses": 0.0
+                },
+                "incapacidades": [
+                    {
+                        "fechaInicio": "00010101",
+                        "fechaFin": "00010101",
+                        "cantidad": 0,
+                        "tipo": 0,
+                        "pago": 0.0
+                    }
+                ],
+                "licencias": [
+                    {
+                        "tipoLicencia": 0,
+                        "pago": 0.0,
+                        "numeroDias": 0,
+                        "fechaInicio": "00010101",
+                        "fechaFin": "00010101"
+                    }
+                ],
+                "bonificacion": [
+                    {
+                        "descripcion": null,
+                        "valor": 0.0,
+                        "esSalarial": false
+                    }
+                ],
+                "auxilios": [
+                    {
+                        "valor": 0.0,
+                        "esSalarial": false,
+                        "descripcion": null
+                    }
+                ],
+                "huelgas": [
+                    {
+                        "fechaInicio": "00010101",
+                        "fechaFin": "00010101",
+                        "cantidad": 0
+                    }
+                ],
+                "otrosConceptos": [
+                    {
+                        "descripcionConcepto": null,
+                        "valor": 0.0,
+                        "esParteSalario": false
+                    }
+                ],
+                "compensaciones": [
+                    {
+                        "tipoCompensacion": 0,
+                        "descripcion": null,
+                        "valor": 0.0
+                    }
+                ],
+                "bonosEPCTV": [
+                    {
+                        "descripcion": null,
+                        "valor": 0.0,
+                        "esParteSalario": false,
+                        "esPagoAlimentacion": false
+                    }
+                ],
+                "comisiones": [
+                    {
+                        "descripcion": null,
+                        "comision": 0.0
+                    }
+                ],
+                "pagosTerceros": [
+                    {
+                        "descripcion": null,
+                        "pagoTercero": 0.0
+                    }
+                ],
+                "anticipos": [
+                    {
+                        "descripcion": null,
+                        "anticipo": 0.0
+                    }
+                ],
+                "dotacion": 0.0,
+                "apoyoSost": 0.0,
+                "teletrabajo": 0.0,
+                "bonifRetiro": 0.0,
+                "indemnizacion": 0.0,
+                "reintegro": 0.0
+            },
+            "deducciones": {
+                "salud": {
+                    "porcentaje": 0.0,
+                    "deduccion": 0.0
+                },
+                "fondoPension": {
+                    "porcentaje": 0.0,
+                    "deduccion": 0.0
+                },
+                "fondoPensionSP": {
+                    "porcentaje": 0.0,
+                    "deduccionSP": 0.0,
+                    "porcentajeSub": 0.0,
+                    "deduccionSub": 0.0
+                },
+                "sindicatos": [
+                    {
+                        "porcentaje": 0.0,
+                        "deduccion": 0.0
+                    }
+                ],
+                "sanciones": [
+                    {
+                        "descripcion": null,
+                        "valorDeduccion": 0.0,
+                        "tipoSancion": false
+                    }
+                ],
+                "libranzas": [
+                    {
+                        "descripcion": null,
+                        "valorDeduccion": 0.0
+                    }
+                ],
+                "pagosTerceros": [
+                    {
+                        "descripcion": null,
+                        "pagotercero": 0.0
+                    }
+                ],
+                "anticipos": [
+                    {
+                        "descripcion": null,
+                        "anticipo": 0.0
+                    }
+                ],
+                "otrosDescuentos": [
+                    {
+                        "descripcion": null,
+                        "otraDeduccion": 0.0
+                    }
+                ],
+                "pensionVoluntaria": 0.0,
+                "retencionFuente": 0.0,
+                "afc": 0.0,
+                "cooperativa": 0.0,
+                "embargofiscal": 0.0,
+                "planComplementarios": 0.0,
+                "educacion": 0.0,
+                "reintegro": 0.0,
+                "deuda": 0.0
+            },
+            "redondeo": 0.0,
+            "devengadosTotal": 0.0,
+            "deduccionesTotal": 0.0
+        }
+    ]
+}

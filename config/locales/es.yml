@@ -3,6 +3,10 @@ es:
     formats:
       short: "%d/%m/%Y"
       long: "%d de %B de %Y"
+  time:
+    formats:
+      short: "%d/%m/%Y %H:%M"
+      long: "%d de %B de %Y %H:%M"
   sidebar:
     dashboard: "Dashboard"
     companies: "Empresas"
@@ -11,6 +15,7 @@ es:
     documents: "Documentos"
     payroll_archives: "Archivo Nominas"
     period_reports: "Reporte Periodos"
+    conversion_logs: "Registro Conversiones"
     sign_out: "Cerrar sesion"
   modules:
     users: "Usuarios"
@@ -21,9 +26,41 @@ es:
     welcome: "Bienvenido a Nomina"
     description: "Esta es una aplicacion demo en su fase inicial de desarrollo, construida para la gestion de nominas y recursos humanos."
     developed_by_html: 'Desarrollado por <span class="font-semibold text-gray-500">Hohem Tecnologia SAS</span>'
+  conversion_logs:
+    title: "Registro de Conversiones"
+    description: "Historial de conversiones de nomina realizadas."
+    empty: "Aun no se han realizado conversiones."
+    fields:
+      date: "Fecha"
+      company: "Empresa"
+      period: "Periodo"
+      user: "Usuario"
+      syscafe_file: "Archivo Syscafe"
+      provisions_file: "Archivo Provisiones"
   documents:
     index:
       description: "Convierte documentos de nomina entre diferentes formatos."
+    converter_form:
+      syscafe_file_label: "Archivo Syscafe (.xlsx)"
+      provisions_file_label: "Archivo Provisiones (.xlsx)"
+      provisions_file_hint: "Opcional. Libro de provisiones del periodo."
+      month_label: "Mes"
+      year_label: "Anio"
+      select_month: "Seleccionar mes..."
+      select_year: "Seleccionar anio..."
+    months:
+      "1": "Enero"
+      "2": "Febrero"
+      "3": "Marzo"
+      "4": "Abril"
+      "5": "Mayo"
+      "6": "Junio"
+      "7": "Julio"
+      "8": "Agosto"
+      "9": "Septiembre"
+      "10": "Octubre"
+      "11": "Noviembre"
+      "12": "Diciembre"
     source_formats:
       syscafe: "Exportado nomina Syscafe"
       minomina: "Exportado nomina MiNomina"

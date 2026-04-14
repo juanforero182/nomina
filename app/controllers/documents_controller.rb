@@ -39,8 +39,16 @@ class DocumentsController < ApplicationController
       )
     end
 
-    csv_content = Converters::MinominaCsvGenerator.new(employees, period_info).generate
+    provisions = {}
+    if params[:provisions_file].present? && params[:month].present?
+      provisions = Converters::ProvisionesParser.new(params[:provisions_file].tempfile.path, params[:month]).parse
+      Rails.logger.info "=== Provisions loaded for #{provisions.keys.length} employees"
+    end
+
+    csv_content = Converters::MinominaCsvGenerator.new(employees, period_info, provisions).generate
     filename = "nomina_minomina_#{Time.current.strftime('%Y%m%d_%H%M%S')}.csv"
+
+    log_conversion(company, uploaded, params[:provisions_file]) if company
 
     send_data csv_content, filename: filename, type: "text/csv", disposition: "attachment"
   rescue DocumentConverterService::InvalidFormatError,
@@ -52,6 +60,23 @@ class DocumentsController < ApplicationController
   end
 
   private
+
+  def log_conversion(company, syscafe_file, provisions_file)
+    month = params[:month].to_i
+    year = params[:year].to_i
+    return unless (1..12).include?(month) && (2020..2030).include?(year)
+
+    ConversionLog.create(
+      user: current_user,
+      company: company,
+      month: month,
+      year: year,
+      syscafe_file_name: syscafe_file&.original_filename,
+      provisions_file_name: provisions_file&.original_filename
+    )
+  rescue StandardError => e
+    Rails.logger.error("ConversionLog save failed: #{e.message}")
+  end
 
   def validate_params!
     unless Document.valid_source_format?(params[:source_format])

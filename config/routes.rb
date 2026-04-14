@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       post :convert
     end
   end
+  resources :conversion_logs, only: [:index]
   resources :payroll_archives, only: [:index]
   resources :period_reports, only: [:index]
 
