@@ -6,7 +6,28 @@ class CompaniesController < ApplicationController
     @companies = Company.order(:name)
   end
 
-  def show; end
+  def show
+    employees = @company.employees.includes(:contracts)
+
+    if params[:q].present?
+      term = "%#{params[:q].downcase}%"
+      employees = employees.where(
+        "LOWER(first_surname) LIKE :t OR LOWER(COALESCE(second_surname,'')) LIKE :t OR LOWER(first_name) LIKE :t OR LOWER(COALESCE(other_names,'')) LIKE :t OR document_number LIKE :d",
+        t: term, d: "%#{params[:q]}%"
+      )
+    end
+
+    active_ids = Contract.where(status: "active").select(:employee_id)
+    case params[:status]
+    when "active"
+      employees = employees.where(id: active_ids)
+    when "inactive"
+      employees = employees.where.not(id: active_ids)
+    end
+
+    employees = employees.order(:first_surname, :first_name)
+    @pagy, @employees = pagy(employees, limit: 20)
+  end
 
   def new
     @company = Company.new

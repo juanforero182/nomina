@@ -99,6 +99,15 @@ es:
     index:
       title: "Empleados"
       description: "Gestiona los empleados de todas las empresas."
+    filters:
+      search: "Buscar por nombre o documento"
+      search_placeholder: "Nombre, apellido o documento..."
+      status: "Estado"
+      all: "Todos"
+      active: "Activo"
+      inactive: "Inactivo"
+      apply: "Filtrar"
+      clear: "Limpiar"
     back: "Volver a empleados"
     new_title: "Nuevo Empleado"
     edit_title: "Editar Empleado"

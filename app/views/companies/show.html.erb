@@ -97,7 +97,34 @@
     <% end %>
   </div>
 
-  <% if @company.employees.any? %>
+  <%= form_with url: company_path(@company), method: :get, local: true,
+                class: "bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-4 flex flex-wrap items-end gap-4" do %>
+    <div class="flex-1 min-w-[200px]">
+      <label class="block text-xs font-medium text-gray-500 mb-1"><%= t("employees.filters.search", default: "Buscar por nombre o documento") %></label>
+      <input type="text" name="q" value="<%= params[:q] %>"
+             placeholder="<%= t("employees.filters.search_placeholder", default: "Nombre, apellido o documento...") %>"
+             class="block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none" />
+    </div>
+    <div>
+      <label class="block text-xs font-medium text-gray-500 mb-1"><%= t("employees.filters.status", default: "Estado") %></label>
+      <select name="status" class="block rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none">
+        <option value=""><%= t("employees.filters.all", default: "Todos") %></option>
+        <option value="active" <%= "selected" if params[:status] == "active" %>><%= t("employees.filters.active", default: "Activo") %></option>
+        <option value="inactive" <%= "selected" if params[:status] == "inactive" %>><%= t("employees.filters.inactive", default: "Inactivo") %></option>
+      </select>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="submit" class="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-500 transition-colors cursor-pointer">
+        <%= t("employees.filters.apply", default: "Filtrar") %>
+      </button>
+      <% if params[:q].present? || params[:status].present? %>
+        <%= link_to t("employees.filters.clear", default: "Limpiar"), company_path(@company),
+            class: "text-sm font-medium text-gray-600 hover:text-gray-800" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if @employees.any? %>
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
@@ -111,7 +138,7 @@
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
-          <% @company.employees.includes(:contracts).order(:first_surname, :first_name).each do |employee| %>
+          <% @employees.each do |employee| %>
             <% latest = employee.latest_contract %>
             <tr class="hover:bg-gray-50 transition-colors">
               <td class="px-6 py-4 text-sm text-gray-600">
@@ -141,6 +168,11 @@
           <% end %>
         </tbody>
       </table>
+    </div>
+
+    <div class="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-gray-600">
+      <div class="text-xs text-gray-500"><%== pagy_info(@pagy) %></div>
+      <nav class="flex items-center gap-1"><%= tailwind_pagy_nav(@pagy) %></nav>
     </div>
   <% else %>
     <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
