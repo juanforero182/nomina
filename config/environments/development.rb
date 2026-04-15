@@ -6,6 +6,10 @@ Rails.application.configure do
   config.consider_all_requests_local = true
   config.server_timing = true
 
+  config.hosts << /[a-z0-9-]+\.ngrok-free\.dev/
+  config.hosts << /[a-z0-9-]+\.ngrok\.io/
+  config.hosts << /[a-z0-9-]+\.ngrok\.app/
+
   if Rails.root.join("tmp/caching-dev.txt").exist?
     config.action_controller.perform_caching = true
     config.action_controller.enable_fragment_cache_logging = true

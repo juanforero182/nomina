@@ -46,9 +46,9 @@ module Converters
       worked_days: 38,
       worked_salary: 39,
       transport_aid: 40,
-      aid_value: 103,
-      aid_is_salary: 104,
-      aid_description: 105,
+      aid_value: 102,
+      aid_is_salary: 103,
+      aid_description: 104,
       vacation_compensated: 78,
       vacation_start: 79,
       vacation_end: 80,
@@ -159,7 +159,7 @@ module Converters
       aid = employee[:other_aid].to_i
       if aid > 0
         row[COLUMNS[:aid_value]] = aid
-        row[COLUMNS[:aid_is_salary]] = "FALSE"
+        row[COLUMNS[:aid_is_salary]] = "false"
         row[COLUMNS[:aid_description]] = "AUXILIO"
       end
 
@@ -184,8 +184,15 @@ module Converters
 
       vacation_value = prov["955"].to_i
       bonus_value = prov["956"].to_i
-      severance_value = prov["953"].to_i
-      severance_interest = prov["954"].to_i
+
+      liquidated_severance = employee[:concepts]&.dig("004").to_i
+      if liquidated_severance > 0
+        severance_value = liquidated_severance
+        severance_interest = (liquidated_severance * 0.12).round
+      else
+        severance_value = prov["953"].to_i
+        severance_interest = prov["954"].to_i
+      end
 
       return nil if vacation_value <= 0 && bonus_value <= 0 && severance_value <= 0 && severance_interest <= 0
 
