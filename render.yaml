@@ -10,6 +10,7 @@ services:
     runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    dockerCommand: ./bin/rails server -b 0.0.0.0 -p $PORT
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -23,5 +24,3 @@ services:
         value: "true"
       - key: RAILS_SERVE_STATIC_FILES
         value: "true"
-      - key: PORT
-        value: "80"
