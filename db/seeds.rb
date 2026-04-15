@@ -1,9 +1,17 @@
-User.find_or_create_by!(email: "admin@nomina.com") do |user|
-  user.password = "password123"
-  user.password_confirmation = "password123"
+users = [
+  { email: "admin@nomina.com",    password: "password123" },
+  { email: "usuario1@nomina.com", password: "password123" },
+  { email: "usuario2@nomina.com", password: "password123" },
+]
+
+users.each do |attrs|
+  User.find_or_create_by!(email: attrs[:email]) do |user|
+    user.password = attrs[:password]
+    user.password_confirmation = attrs[:password]
+  end
 end
 
-puts "Usuario seed creado: admin@nomina.com / password123"
+puts "Usuarios seed creados"
 
 company = Company.find_or_create_by!(nit: "901234567-1") do |c|
   c.name = "IUSTUM A&G S.A.S"
