@@ -1,0 +1,27 @@
+databases:
+  - name: nomina-db
+    plan: free
+    databaseName: nomina_production
+    user: nomina
+
+services:
+  - type: web
+    name: nomina
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nomina-db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_ENV
+        value: production
+      - key: RAILS_LOG_TO_STDOUT
+        value: "true"
+      - key: RAILS_SERVE_STATIC_FILES
+        value: "true"
+      - key: PORT
+        value: "80"
